@@ -4,7 +4,7 @@
 	"main": "main.js",
 	"scripts": {
 		"start": "electron .",
-		"build": "electron-builder"
+		"build": "electron-builder --win --publish=always"
 	},
 	"build": {
 		"appId": "com.morteza.desktopRubika",
@@ -20,15 +20,24 @@
 			"uninstallerIcon": "Assets/Rubika_Icon.ico",
 			"uninstallDisplayName": "Uninstall Rubika",
 			"allowToChangeInstallationDirectory": true
-		}
+		},
+		"publish": [
+			{
+				"provider": "github",
+				"owner": "morteza20deris",
+				"repo": "Rubika-Desktop"
+			}
+		]
 	},
 	"keywords": [],
 	"author": "Morteza",
 	"license": "ISC",
 	"description": "A Desktop Version for Rubika",
-	"dependencies": {},
+	"dependencies": {
+		"electron-updater": "^6.3.9"
+	},
 	"devDependencies": {
-		"electron-builder": "^25.1.7",
-		"electron": "^32.1.2"
+		"electron": "^32.1.2",
+		"electron-builder": "^25.1.7"
 	}
 }

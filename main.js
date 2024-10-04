@@ -1,7 +1,7 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, dialog } = require("electron");
 const { autoUpdater } = require("electron-updater");
 function createWindow() {
-	const win = new BrowserWindow({
+	const mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
 		webPreferences: {
@@ -10,14 +10,16 @@ function createWindow() {
 		},
 	});
 
-	win.loadURL("https://web.rubika.ir"); // URL of the Rubika web app
+	mainWindow.loadURL("https://web.rubika.ir"); // URL of the Rubika web app
+
+	mainWindow.setMenu(null);
 	autoUpdater.checkForUpdatesAndNotify();
-	win.setMenu(null);
 }
 
 app.whenReady().then(createWindow);
 
 autoUpdater.on("update-available", (info) => {
+	console.log("Update is Available");
 	dialog
 		.showMessageBox({
 			type: "info",

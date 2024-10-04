@@ -1,12 +1,15 @@
 const { app, BrowserWindow, dialog } = require("electron");
 const { autoUpdater } = require("electron-updater");
+const path = require("path");
+
 function createWindow() {
 	const mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
 		webPreferences: {
-			nodeIntegration: true,
-			contextIsolation: false,
+			preload: path.join(__dirname, "preload.js"), // Link to the preload script
+			nodeIntegration: false,
+			contextIsolation: true,
 		},
 	});
 

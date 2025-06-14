@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+	<head>
+		<meta charset="UTF-8" />
+		<title>به‌روزرسانی</title>
+		<style>
+			body {
+				font-family: "Vazir", sans-serif;
+				margin: 0;
+				padding: 2rem;
+				background: #1e1e2f;
+				color: white;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+			}
+			h2 {
+				color: #00bcd4;
+			}
+			button {
+				margin: 1rem;
+				padding: 0.8rem 1.5rem;
+				background: #00bcd4;
+				border: none;
+				border-radius: 5px;
+				color: #fff;
+				cursor: pointer;
+				font-size: 1rem;
+			}
+			button:hover {
+				background: #0097a7;
+			}
+			#progress {
+				width: 100%;
+				margin-top: 20px;
+				background: #333;
+				border-radius: 5px;
+				overflow: hidden;
+			}
+			#progressBar {
+				height: 20px;
+				background: #00e676;
+				width: 0%;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>نسخه جدیدی در دسترس است</h2>
+		<p id="versionInfo">در حال بررسی نسخه...</p>
+		<div>
+			<button id="updateNow">به‌روزرسانی کن</button>
+			<button onclick="window.close()">بعداً</button>
+		</div>
+		<div id="progress" style="display: none">
+			<div id="progressBar"></div>
+		</div>
+
+		<script>
+			const { ipcRenderer } = require("electron");
+
+			ipcRenderer.on("version-info", (_, version) => {
+				document.getElementById(
+					"versionInfo"
+				).innerText = `نسخه ${version} آماده نصب است`;
+			});
+
+			ipcRenderer.on("download-progress", (_, percent) => {
+				document.getElementById("progress").style.display = "block";
+				document.getElementById("progressBar").style.width =
+					percent + "%";
+			});
+
+			document.getElementById("updateNow").onclick = () => {
+				ipcRenderer.send("start-update");
+			};
+		</script>
+	</body>
+</html>

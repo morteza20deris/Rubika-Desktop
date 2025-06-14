@@ -1,11 +1,11 @@
 {
 	"name": "rubika-desktop",
-	"version": "1.0.5",
+	"version": "1.0.4",
 	"main": "main.js",
 	"scripts": {
 		"start": "electron .",
-		"publish": "dotenv electron-builder --win --publish=always",
-		"build": "electron-builder"
+		"publish": "dotenv -- electron-builder --win --publish=always",
+		"build": "electron-builder --win"
 	},
 	"build": {
 		"appId": "com.morteza.desktopRubika",
@@ -19,6 +19,8 @@
 			"oneClick": false,
 			"installerIcon": "Assets/Rubika_Icon.ico",
 			"uninstallerIcon": "Assets/Rubika_Icon.ico",
+			"allowElevation": true,
+			"perMachine": true,
 			"uninstallDisplayName": "Uninstall Rubika",
 			"allowToChangeInstallationDirectory": true
 		},

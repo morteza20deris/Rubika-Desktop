@@ -111,7 +111,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	});
 
 	// Update downloaded — ask user if they want to install now
-	ipcRenderer.on("update-download-complete", () => {
+	ipcRenderer.on("update-downloaded", () => {
 		showUpdateDialog(
 			null,
 			{

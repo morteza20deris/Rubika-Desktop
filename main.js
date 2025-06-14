@@ -66,6 +66,11 @@ ipcMain.on("start-update", () => {
 	autoUpdater.downloadUpdate();
 });
 
+ipcMain.on("install-update", () => {
+	app.isQuiting = true;
+	autoUpdater.quitAndInstall();
+});
+
 // AutoUpdater events
 autoUpdater.on("update-available", (info) => {
 	console.log("به‌روزرسانی در دسترس است:", info.version);
